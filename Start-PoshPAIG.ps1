@@ -730,17 +730,17 @@ Function Start-RunJob {
                     $uiHash.Listview.Items.Refresh() 
                 })                
                 Set-Location $Path
-                . .\Scripts\Get-ComputerRebootState.ps1
-                $clientRebootRequired = Get-ComputerRebootState -Computer $Computer.computer
+                . .\Scripts\Get-PendingReboot.ps1
+                $clientRebootRequired = Get-PendingReboot -Computer $Computer.computer
                 $uiHash.ListView.Dispatcher.Invoke("Background",[action]{                    
                     $uiHash.Listview.Items.EditItem($Computer)
-                    If ($clientRebootRequired.RebootRequired -eq $True) {
+                    If ($clientRebootRequired.RebootPending -eq $True) {
                         $Computer.Notes = "Reboot Required"
-                    } ElseIf ($clientRebootRequired.RebootRequired -eq $False) {
+                    } ElseIf ($clientRebootRequired.RebootPending -eq $False) {
                         $Computer.Notes = "No Reboot Required"
-                    } ElseIf ($clientRebootRequired.RebootRequired -eq "NA") {
+                    } ElseIf ($clientRebootRequired.RebootPending -eq "NA") {
                         $Computer.Notes = "Unable to determine reboot state"
-                    } ElseIf ($clientRebootRequired.RebootRequired -eq "Offline") {
+                    } ElseIf ($clientRebootRequired.RebootPending -eq "Offline") {
                         $Computer.Notes = "Offline"
                     }  
                     $uiHash.Listview.Items.CommitEdit()
