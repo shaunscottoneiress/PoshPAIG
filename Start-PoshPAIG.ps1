@@ -735,13 +735,13 @@ Function Start-RunJob {
                 $uiHash.ListView.Dispatcher.Invoke("Background",[action]{                    
                     $uiHash.Listview.Items.EditItem($Computer)
                     If ($clientRebootRequired.CCMClientSDK -eq $True) {
-                        $Computer.Notes = "CCM Client Reboot Required"
+                        $Computer.Notes = "Reboot Required - CCM Client"
                     } ElseIf ($clientRebootRequired.WindowsUpdate -eq $True) {
-                        $Computer.Notes = "Windows Updates Reboot Required" 
+                        $Computer.Notes = "Reboot Required - Windows Updates" 
                     } ElseIf ($clientRebootRequired.CBServicing -eq $True) {
-                        $Computer.Notes = "CBServicing Reboot Required"
+                        $Computer.Notes = "Reboot Required - CBServicing"
                     } ElseIf ($clientRebootRequired.RebootPending -eq $True) {
-                        $Computer.Notes = "Other Reboot Required"
+                        $Computer.Notes = "Reboot Required - Other"
                     } ElseIf ($clientRebootRequired.RebootPending -eq $False) {
                         $Computer.Notes = "No Reboot Required"
                     } ElseIf ($clientRebootRequired.RebootPending -eq "NA") {
