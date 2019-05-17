@@ -734,8 +734,12 @@ Function Start-RunJob {
                 $clientRebootRequired = Get-PendingReboot -Computer $Computer.computer
                 $uiHash.ListView.Dispatcher.Invoke("Background",[action]{                    
                     $uiHash.Listview.Items.EditItem($Computer)
-                    If ($clientRebootRequired.RebootPending -eq $True) {
-                        $Computer.Notes = "Reboot Required"
+                    If ($clientRebootRequired.CCMClientSDK -eq $True) {
+                        $Computer.Notes = "CCM Client Reboot Required"
+                    } ElseIf ($clientRebootRequired.WindowsUpdate -eq $True) {
+                        $Computer.Notes = "Windows Updates Reboot Required" 
+                    } ElseIf ($clientRebootRequired.CBServicing -eq $True) {
+                        $Computer.Notes = "CBServicings Reboot Required"
                     } ElseIf ($clientRebootRequired.RebootPending -eq $False) {
                         $Computer.Notes = "No Reboot Required"
                     } ElseIf ($clientRebootRequired.RebootPending -eq "NA") {
