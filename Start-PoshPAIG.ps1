@@ -739,7 +739,9 @@ Function Start-RunJob {
                     } ElseIf ($clientRebootRequired.WindowsUpdate -eq $True) {
                         $Computer.Notes = "Windows Updates Reboot Required" 
                     } ElseIf ($clientRebootRequired.CBServicing -eq $True) {
-                        $Computer.Notes = "CBServicings Reboot Required"
+                        $Computer.Notes = "CBServicing Reboot Required"
+                    } ElseIf ($clientRebootRequired.RebootPending -eq $True) {
+                        $Computer.Notes = "Other Reboot Required"
                     } ElseIf ($clientRebootRequired.RebootPending -eq $False) {
                         $Computer.Notes = "No Reboot Required"
                     } ElseIf ($clientRebootRequired.RebootPending -eq "NA") {
